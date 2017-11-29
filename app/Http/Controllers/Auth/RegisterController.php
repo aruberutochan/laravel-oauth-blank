@@ -6,6 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -67,5 +69,52 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Override of the original to support api 
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function apiRegister(Request $request)
+    {
+        
+        $v = validator($request->only('email', 'name', 'password', 'password_confirmation'), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        
+        if ($v->fails()) {
+            return response()->json($v->errors()->all(), 400);
+        }
+        $data = request()->only('email','name','password');
+
+        $user = \App\User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+
+        $client = \Laravel\Passport\Client::where('password_client', 1)->first();
+
+        $request->request->add([
+            'grant_type'    => 'password',
+            'client_id'     => $client->id,
+            'client_secret' => $client->secret,
+            'username'      => $data['email'],
+            'password'      => $data['password'],
+            'scope'         => null,
+        ]);
+        
+        // Fire off the internal request. 
+        $proxy = Request::create(
+            'oauth/token',
+            'POST'
+        );
+
+        return \Route::dispatch($proxy);
+        
     }
 }
