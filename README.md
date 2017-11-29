@@ -77,7 +77,7 @@ You can use it to conect to the endpoints generated:
 | ---------- | ------------------------- | ---------------------------------------- |
 |POST        | oauth/token               | Request for user token                   |
 |POST        | oauth/token/refresh       | Refresh token                            |
-|GET|HEAD    | oauth/tokens              | Get authorized access tokens for user    |
+|GET / HEAD  | oauth/tokens              | Get authorized access tokens for user    |
 |DELETE      | oauth/tokens/{token_id}   | Delete token                             |
 |POST        | api/user/register         | Register user                            |
 
