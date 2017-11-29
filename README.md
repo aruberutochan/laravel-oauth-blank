@@ -15,8 +15,8 @@ cd laravel-oauth-blank
 You need to run this command to have a full installation
 
 #### Configure Database
-Make sure you have a .env file with the database confiuration set.
-You can use a copy of the .env.example file
+Make sure you have a `.env` file with the database confiuration set.
+You can use a copy of the `.env.example` file
 
 ```
 cp .env.example .env
@@ -34,4 +34,19 @@ DB_PASSWORD=secret
 (...)
 
 ```
+
+#### Configure Laravel Emails
+If you want to handle password recovery by email you should config laravel email sending:
+
+Edit your `.env` file and add the following information
+```
+(...)
+MAIL_DRIVER=smtp
+MAIL_HOST=your.email.host.url
+MAIL_PORT=YourPort
+MAIL_USERNAME=your_user_name@domain.com
+MAIL_PASSWORD=secret
+(...)
+```
+
 #### Artisan configuration commands 
