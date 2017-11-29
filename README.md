@@ -1,4 +1,4 @@
-# Laravel OAuth Blanl
+# Laravel OAuth BlanK
 
 This is a starting install of Laravel, with OAuth enabled
 
@@ -72,17 +72,18 @@ To conect to your Api you will need the OAuth client ID and the Client Secret ge
 
 You can use it to conect to the endpoints generated:
 
-```
-Method      | End Point                 | Description
-POST        | oauth/token               | Request for user token                             
-POST        | oauth/token/refresh       | Refresh token
-GET|HEAD    | oauth/tokens              | Get authorized access tokens for user
-DELETE      | oauth/tokens/{token_id}   | Delete token
-POST        | api/user/register         | Register user
-```
+
+|Method      | End Point                 | Description                              |
+| ---------- | ------------------------- | ---------------------------------------- |
+|POST        | oauth/token               | Request for user token                   |
+|POST        | oauth/token/refresh       | Refresh token                            |
+|GET|HEAD    | oauth/tokens              | Get authorized access tokens for user    |
+|DELETE      | oauth/tokens/{token_id}   | Delete token                             |
+|POST        | api/user/register         | Register user                            |
+
 #### Connect using php
 Get token for a user registered
-```[PHP]
+```php
 <?php
 
 $client = new http\Client;
@@ -108,7 +109,7 @@ echo $response->getBody();
 ```
 
 Register user via Api
-```[PHP]
+```php
 <?php
 
 $client = new http\Client;
