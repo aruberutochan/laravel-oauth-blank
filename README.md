@@ -61,8 +61,8 @@ npm run dev
 Generate OAuth Keys and database schema
 
 ```
-php artisan passport:install
 php artisan migrate
+php artisan passport:install
 ```
 Passport will generate 2 keys IDs and 2 Key Secret, one for personal access, the other for password access. Save them to use in your future conections
 
